@@ -4,7 +4,7 @@ package cn.swpu.beans;
 public class Message {
 
   private String email;
-  private String userName;
+  private String username;
   private long id;
   private String message;
   private java.sql.Date date;
@@ -19,12 +19,12 @@ public class Message {
   }
 
 
-  public String getUserName() {
-    return userName;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUserName(String userName) {
-    this.userName = userName;
+  public void setUsername(String userName) {
+    this.username = userName;
   }
 
 

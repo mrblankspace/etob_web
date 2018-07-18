@@ -1,6 +1,7 @@
 package cn.swpu.web;
 
-import cn.swpu.dao.TestDao;
+import ch.qos.logback.core.net.SyslogOutputStream;
+import cn.swpu.beans.Message;
 import cn.swpu.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,16 +9,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class MessageAction {
-    private MessageService messageService;
     @Autowired
-    private TestDao testDao;
+    private MessageService messageService;
 
-    //返回注册页面
+    /**
+     * 消息保存方法
+     * @param message
+     * @return
+     */
     @RequestMapping(value = {"/"})
-    public String RegisterLogin() {
-        System.out.println(testDao.findAll().toString());
-
-        return "/";
+    public String save(Message message) {
+        messageService.save(message);
+        return "list";
     }
 }
 
