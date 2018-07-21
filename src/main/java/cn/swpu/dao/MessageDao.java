@@ -1,10 +1,7 @@
 package cn.swpu.dao;
 
 import cn.swpu.beans.Message;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ public interface MessageDao {
     void delete(long id);
     @Select("select count(*) from message")
     Integer count();
+    //需要加注解
     @Select("select * from message limit #{currentPage}, #{pageSize}")
-    List<Message> findPage(int currentPage, int pageSize);
+    List<Message> findPage(@Param("currentPage")int currentPage, @Param("pageSize")int pageSize);
 }
