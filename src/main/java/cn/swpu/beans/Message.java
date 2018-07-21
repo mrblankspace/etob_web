@@ -1,13 +1,17 @@
 package cn.swpu.beans;
 
 
+import javax.validation.constraints.NotNull;
+
 public class Message {
 
   private String email;
+  @NotNull
   private String username;
   private long id;
+  @NotNull
   private String message;
-  private java.sql.Date date;
+  private String date;
 
 
   public String getEmail() {
@@ -45,13 +49,11 @@ public class Message {
     this.message = message;
   }
 
-
-  public java.sql.Date getDate() {
+  public String getDate() {
     return date;
   }
 
-  public void setDate(java.sql.Date date) {
+  public void setDate(String date) {
     this.date = date;
   }
-
 }
