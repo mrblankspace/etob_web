@@ -6,10 +6,10 @@ import javax.validation.constraints.NotNull;
 public class Message {
 
   private String email;
-  @NotNull
+//  @NotNull
   private String username;
   private long id;
-  @NotNull
+//  @NotNull
   private String message;
   private String date;
 
