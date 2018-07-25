@@ -24,7 +24,7 @@ public class MessageAction {
     private MessageService messageService;
 
     /**
-     * 消息保存方法
+     * 消息保存方法 底层websocket实现   暂时保留
      * @param message
      * @return
      */

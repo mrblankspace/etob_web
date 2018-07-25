@@ -27,7 +27,6 @@ public class MessageHandler extends AbstractWebSocketHandler {
 
     @Override
     protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-        sessionList.add(session);
         for(WebSocketSession eachSession : sessionList) {//转发给每个连接
             session.sendMessage(message);   //这里的message存储是前端js往/api/charRoom/getNewMessage发送的 新插入的message对象json字符串
         }
