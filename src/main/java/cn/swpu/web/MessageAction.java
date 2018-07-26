@@ -4,6 +4,7 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 import cn.swpu.beans.Message;
 import cn.swpu.beans.PageBean;
 import cn.swpu.services.MessageService;
+import cn.swpu.services.StompMessageService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class MessageAction {
     @Autowired
     private MessageService messageService;
 
+    @Autowired
+    private StompMessageService  stompMessageService;
     /**
      * 消息保存方法 底层websocket实现   暂时保留
      * @param message
@@ -36,6 +39,7 @@ public class MessageAction {
         System.out.println(message.getEmail());
         try{
             messageService.save(message);
+            stompMessageService.sendMessageToProxy(message);     //这里保存消息的同时发送消息给代理
         }catch (Exception e){
            e.printStackTrace();
             JSONPObject state = new JSONPObject("states","false");
@@ -43,6 +47,7 @@ public class MessageAction {
         }
         JSONPObject state = new JSONPObject("states","true");
         //视图名?
+        //
         return state;
     }
 

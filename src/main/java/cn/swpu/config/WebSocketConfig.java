@@ -13,7 +13,7 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 public class WebSocketConfig implements WebSocketConfigurer {
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-        registry.addHandler(messageHandler(),"/api/charRoom/getNewMessage").withSockJS();
+        registry.addHandler(messageHandler(),"/api/charRoom/snedNewMessage").withSockJS();
     }
     @Bean
     public MessageHandler messageHandler(){
