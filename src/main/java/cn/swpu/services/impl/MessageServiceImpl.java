@@ -6,9 +6,8 @@ import cn.swpu.dao.MessageDao;
 import cn.swpu.services.MessageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.ui.Model;
 
-import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -40,5 +39,11 @@ public class MessageServiceImpl implements MessageService{
         List<Message> list = messageDao.findPage(pageBean.getCurrentPage(), pageBean.getPageSize());
         pageBean.setList(list);
         return pageBean;
+    }
+
+    @Override
+    public ArrayList<Message> getNewTenMessage() {
+        ArrayList<Message> list = (ArrayList<Message>) messageDao.getNewTenMessage();
+        return list;
     }
 }

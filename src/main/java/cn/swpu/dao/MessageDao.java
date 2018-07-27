@@ -16,4 +16,7 @@ public interface MessageDao {
     //需要加注解
     @Select("select * from message limit #{currentPage}, #{pageSize}")
     List<Message> findPage(@Param("currentPage")int currentPage, @Param("pageSize")int pageSize);
+
+    @Select("select * from(select username, date, email, message from message order by date desc limit 13)as a order by date")
+    List<Message> getNewTenMessage();
 }

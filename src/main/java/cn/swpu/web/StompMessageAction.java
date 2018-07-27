@@ -17,9 +17,11 @@ import org.springframework.web.socket.WebSocketSession;
 public class StompMessageAction {
     private static final Logger logger = LoggerFactory.getLogger(StompMessageAction.class);
 
-    @MessageMapping("/api/charRoom/getNewMessage")    //注意隐含的  /app 前缀   请求要带/app
+    @MessageMapping("/api/charRoom/sendNewMessage")    //注意隐含的  /app 前缀   请求要带/app
     @SendTo("/topic/chatRoom")   //重載发布消息地址
     public Message sendMessage(Message message){
+
+        System.out.println("ss");
         return message;
     }
 

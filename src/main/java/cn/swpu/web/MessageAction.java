@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -36,10 +37,11 @@ public class MessageAction {
     public JSONPObject save(@RequestBody Message message) {
         Date date = new Date();
         message.setDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date));
-        System.out.println(message.getEmail());
         try{
             messageService.save(message);
-            stompMessageService.sendMessageToProxy(message);     //这里保存消息的同时发送消息给代理
+            //返回最新 10 条 给前端
+          ArrayList<Message> list = messageService.getNewTenMessage();
+            stompMessageService.sendMessageToProxy(list);     //这里保存消息的同时发送消息给代理
         }catch (Exception e){
            e.printStackTrace();
             JSONPObject state = new JSONPObject("states","false");
@@ -68,6 +70,11 @@ public class MessageAction {
     public PageBean<Message> listMessage(@Valid PageBean<Message> pageBean){
             return messageService.findPage(pageBean);
     }
+  @ResponseBody
+  @RequestMapping(value = {"/api/charRoom/getNewTenMessage"}, method = RequestMethod.GET)
+  public ArrayList<Message> getNewTenMessage() {
+    return messageService.getNewTenMessage();
+  }
 }
 
 
